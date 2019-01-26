@@ -8,11 +8,21 @@
 
 <script>
 import Pitch from './components/Pitch.vue'
+import Game from './libs/game';
 
 export default {
+  data: () => {
+    return {
+      game: null
+    };
+  },
   name: 'app',
   components: {
     Pitch
+  },
+  created() {
+    this.game = new Game();
+    this.game.start();
   }
 }
 </script>
