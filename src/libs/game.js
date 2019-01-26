@@ -90,7 +90,10 @@ export default class Game {
       ball: '',
       goal: ''
     };
-    this.state.moves = [];
+    this.state.moves = {
+      p0: null,
+      p1: null
+    };
     this.state.turn++;
   }
 

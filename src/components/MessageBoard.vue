@@ -13,12 +13,15 @@ export default {
         }
     },
     computed: {
-        msg: () => {
+        msg: function() {
+            if (this.moves === undefined) {
+                return 'Make your move'
+            }
             if (!this.moves.p1 && !this.moves.p0) {
                 return 'Make your move'
             } else if (!this.moves.p1) {
                 return 'Waiting for striker move'
-            } else if (!this.moves.p0) {
+            } else {
                 return 'Waiting for goalkeeper move'
             }
         }
