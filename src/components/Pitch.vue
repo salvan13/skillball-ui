@@ -32,7 +32,7 @@ export default {
 
 <style>
 .main-pitch {
-    background-color: green;
+    background-color: #2b862b;
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -66,13 +66,16 @@ export default {
 
 .goal {
     position: relative;
-    top: -38vh;
+    top: -38.5vh;
     border: 1vh solid black;
     border-bottom: none;
     width: 20%;
     height: 10vh;
     left: 50%;
     transform: translateX(-50%);
+    background-color: #fff;
+    background-size: 2vmin 2vmin;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, .2) 1vmin, transparent 1vmin), linear-gradient(to bottom, rgba(0, 0, 0, .2) 1vmin, transparent 1vmin);
 }
 
 .ball {
@@ -83,14 +86,16 @@ export default {
     position: absolute;
     top: 0;
     left: 50%;
-    transition: all 2s ease;
+    transition: all 0.2s ease;
     transform: translateX(0) translateY(40vh);
-    z-index: 10;
+    z-index: 100;
+    border: 1px solid black;
 }
 
 .animated .ball {
+    transition: all 2s ease;
     transition-delay: 0.3s;
-    transform: translateX(0) translateY(0vh);
+    transform: translateX(1vw) translateY(0vh);
 }
 
 .animated .ball[data-animation='left'] {
@@ -114,10 +119,10 @@ export default {
 }
 
 .striker {
-    background: blue;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
+    background-image: url('../assets/fw.svg');
+    background-size: contain;
+    width: 45px;
+    height: 45px;
     position: absolute;
     top: 0;
     left: 50%;
@@ -126,32 +131,33 @@ export default {
 }
 
 .animated .striker {
-    transform: translateX(0) translateY(40vh);
+    transform: translateX(-1vh) translateY(36vh);
 }
 
 .goalkeeper {
-    background: red;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
+    background-image: url('../assets/gk.svg');
+    background-size: contain;
+    width: 45px;
+    height: 45px;
     position: absolute;
     top: 0;
     left: 50%;
     transition: all 2s ease;
-    transform: translateX(0) translateY(1vh);
+    transform: translateX(0) translateY(-4vh);
+    z-index: 10;
 }
 
 .animated .goalkeeper {
     transition-delay: 0.5s;
-    transform: translateX(0) translateY(0vh);
+    transform: translateX(0) translateY(-2vh);
 }
 
 .animated .goalkeeper[data-animation='left'] {
-    transform: translateX(-7vw) translateY(1vh);
+    transform: translateX(-8vw) translateY(0vh) rotate(-90deg);
 }
 
 .animated .goalkeeper[data-animation='right'] {
-    transform: translateX(7vw) translateY(1vh);
+    transform: translateX(6vw) translateY(-1vh) rotate(90deg);
 }
 
 </style>

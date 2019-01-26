@@ -1,3 +1,8 @@
+import referee from '../assets/sounds/referee-whistle.mp3';
+import goal from '../assets/sounds/goal.mp3';
+import save from '../assets/sounds/save.mp3';
+
+
 export default class Game {
 
   constructor() {
@@ -48,12 +53,17 @@ export default class Game {
       this.state.moves[`p${msg.player}`] = msg;
     }
     if(this.state.moves.p0 && this.state.moves.p1) {
+      
+      const isGoal = this.state.moves.p0.move !== this.state.moves.p1.move;
+
       this.state.animation = {
         active: true,
         goalkeeper: this.state.moves.p0.move,
         ball: this.state.moves.p1.move,
-        goal: this.state.moves.p0.move !== this.state.moves.p1.move ? '1' : ''
+        goal: isGoal ? '1' : ''
       }
+
+      new Audio(isGoal ? goal : save).play();
 
       setTimeout(() => {
         if(this.state.moves.p0.move === this.state.moves.p1.move) {
@@ -61,7 +71,7 @@ export default class Game {
         } else {
           this.state.score.striker++;
         }
-        this.state.goal = this.state.moves.p0.move !== this.state.moves.p1.move ? 'GOOOOOAL!!!' : 'Amazing save!!'
+        this.state.goal = isGoal ? 'GOOOOOAL!!!' : 'Amazing save!!'
         
         setTimeout(() => {
           this.nextTurn();
@@ -74,6 +84,9 @@ export default class Game {
   }
 
   nextTurn() {
+
+    new Audio(referee).play();
+
     this.state.animation = {
       active: false,
       goalkeeper: '',
