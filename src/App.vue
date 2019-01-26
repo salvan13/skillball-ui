@@ -3,7 +3,7 @@
     <strong>SkillBall</strong>
     <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
     <div class="container">
-      <MessageBoard />
+      <MessageBoard :moves="game.state.moves" />
       <ScoreBoard :turn="game.state.turn" :score="game.state.score" />
     </div>
     <Pitch :animation="game.state.animation" />

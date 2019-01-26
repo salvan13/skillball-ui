@@ -7,9 +7,20 @@
 <script>
 export default {
     props: {
-        msg: {
-            type: String,
-            default: 'Make your move'
+        moves: {
+            type: Object,
+            required: true
+        }
+    },
+    computed: {
+        msg: () => {
+            if (!this.moves.p1 && !this.moves.p0) {
+                return 'Make your move'
+            } else if (!this.moves.p1) {
+                return 'Waiting for striker move'
+            } else if (!this.moves.p0) {
+                return 'Waiting for goalkeeper move'
+            }
         }
     }
 }
