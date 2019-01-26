@@ -10,14 +10,16 @@ export default class Game {
         goalkeeper: 0,
         striker: 0
       },
+      moves: [],
       animation: {
         active: false,
-        goalkeeper: 0,
-        ball: 0
+        goalkeeper: '',
+        ball: '',
+        goal: ''
       }
     };
 
-    this.socket = new WebSocket('ws://skillball.herokuapp.com/ws');
+    this.socket = new WebSocket('ws://192.168.78.230:3000/ws');
 
     this.socket.onopen = () => {
       console.log('connected');
@@ -25,7 +27,9 @@ export default class Game {
     };
 
     this.socket.onmessage = e => {
-      console.log('socket message', JSON.parse(e.data), e);
+      const msg = JSON.parse(e.data);
+      console.log('message', msg);
+      this.onMessage(msg);
     };
 
     this.socket.onerror = error => {
@@ -33,15 +37,56 @@ export default class Game {
       this.state.error = error;
     };
 
+
+    /*setTimeout(() => {
+        const msg1 = {
+          player: 0,
+          move: 'left'
+        };
+
+        const msg2 = {
+          player: 1,
+          move: 'left'
+        };
+
+        this.onMessage(msg1);
+        this.onMessage(msg2);
+    }, 2000);*/
+
   }
 
-  send(obj) {
-    this.socket.send(JSON.stringify(obj));
+  onMessage(msg) {
+    if(!this.state.moves[msg.player]) {
+      this.state.moves[msg.player] = msg;
+    }
+    if(this.state.moves[0] && this.state.moves[1]) {
+      if(this.state.moves[0].move === this.state.moves[1].move) {
+        this.state.score.goalkeeper++;
+      } else {
+        this.state.score.striker++;
+      }
+      this.state.animation = {
+        active: true,
+        goalkeeper: this.state.moves[0].move,
+        ball: this.state.moves[1].move,
+        goal: this.state.moves[0].move !== this.state.moves[1].move ? '1' : ''
+      }
+    }
+
+    setTimeout(() => {
+      this.nextTurn();
+    }, 5000);
   }
 
   nextTurn() {
+    this.state.animation = {
+      active: false,
+      goalkeeper: '',
+      ball: '',
+      goal: ''
+    };
+    this.state.moves = [];
     this.state.turn++;
-    this.send({type: 'next_turn'});
   }
 
 }

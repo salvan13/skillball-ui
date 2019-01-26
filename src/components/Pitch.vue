@@ -4,7 +4,7 @@
             <div class="box">
             </div>
             <div class="goal"></div>
-            <div class="ball" :data-animation="animation.ball"></div>
+            <div class="ball" :data-animation="animation.ball" :data-goal="animation.goal"></div>
             <div class="striker"></div>
             <div class="goalkeeper" :data-animation="animation.goalkeeper"></div>
         </div>
@@ -78,12 +78,24 @@ export default {
     transform: translateX(0) translateY(0vh);
 }
 
-.animated .ball[data-animation='-1'] {
+.animated .ball[data-animation='left'] {
     transform: translateX(-7vw) translateY(1vh);
 }
 
-.animated .ball[data-animation='1'] {
+.animated .ball[data-animation='right'] {
     transform: translateX(7vw) translateY(1vh);
+}
+
+.animated .ball[data-animation='left'][data-goal='1'] {
+    transform: translateX(-7vw) translateY(-7vh);
+}
+
+.animated .ball[data-animation='right'][data-goal='1'] {
+    transform: translateX(7vw) translateY(-7vh);
+}
+
+.animated .ball[data-animation='center'][data-goal='1'] {
+    transform: translateX(0) translateY(-7vh);
 }
 
 .striker {
@@ -119,11 +131,11 @@ export default {
     transform: translateX(0) translateY(0vh);
 }
 
-.animated .goalkeeper[data-animation='-1'] {
+.animated .goalkeeper[data-animation='left'] {
     transform: translateX(-7vw) translateY(1vh);
 }
 
-.animated .goalkeeper[data-animation='1'] {
+.animated .goalkeeper[data-animation='right'] {
     transform: translateX(7vw) translateY(1vh);
 }
 
