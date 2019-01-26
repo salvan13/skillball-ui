@@ -3,17 +3,26 @@ export default class Game {
   constructor() {
 
     this.state = {
-      started: false,
       ended: false,
       error: null,
       turn: 0,
       score: {
         goalkeeper: 0,
         striker: 0
+      },
+      animation: {
+        active: false,
+        goalkeeper: 0,
+        ball: 0
       }
     };
 
-    this.socket = new WebSocket('ws://skillball.herokuapp.com/socket');
+    this.socket = new WebSocket('ws://skillball.herokuapp.com/ws');
+
+    this.socket.onopen = () => {
+      console.log('connected');
+      this.nextTurn();
+    };
 
     this.socket.onmessage = e => {
       console.log('socket message', JSON.parse(e.data), e);
@@ -27,12 +36,7 @@ export default class Game {
   }
 
   send(obj) {
-    //this.socket.send(JSON.stringify(obj));
-  }
-
-  start() {
-    this.state.started = true;
-    this.nextTurn();
+    this.socket.send(JSON.stringify(obj));
   }
 
   nextTurn() {

@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <h1 id="title">SkillBall</h1>
+    <strong>SkillBall</strong>
     <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
-    <Pitch />
+    <Pitch :animation="game.state.animation" />
   </div>
 </template>
 
@@ -22,7 +22,6 @@ export default {
   },
   created() {
     this.game = new Game();
-    this.game.start();
   }
 }
 </script>
