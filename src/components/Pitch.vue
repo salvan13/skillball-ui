@@ -27,8 +27,7 @@ export default {
     background-color: green;
     height: 100vh;
     display: flex;
-    margin: auto;
-    padding: 2%;
+    margin: 0 auto;
 }
 
 .real-pitch {
