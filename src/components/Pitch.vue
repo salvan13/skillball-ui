@@ -39,6 +39,7 @@ export default {
     margin: 0 auto;
 }
 .instructions {
+    font-size: 26px;
     display: flex;
     justify-content: space-evenly;
     padding: 0 5%;
