@@ -1,7 +1,7 @@
 <template>
     <div class="scoreboard">
         <ul class="score-box">
-            <li class="score-data">TURNO {{ turn }}</li>
+            <li class="score-data turn">ROUND {{ turn }}</li>
             <li class="score-data score-goalkeeper">
                 <div class="title">GOALKEEPER</div>
                 <div class="value">{{ score.goalkeeper }}</div>
@@ -33,15 +33,16 @@ export default {
 .scoreboard {
     display: flex;
     justify-content: flex-end;
-    margin: 0 8%;
+    max-width: 25%;
+    height: 20vh;
+    border: 2px solid white;
 }
 .score-box {
-    border: 2px solid white;
     padding: 20px;
     list-style: none;
-    text-align: left;
     color: white;
-    width: 30vh;
+    width: 20vh;
+    font-size: 2vh;
 }
 .score-data {
     margin: 5px 0;
@@ -49,21 +50,21 @@ export default {
     justify-content: space-between;
     width: 100%;
 }
+.turn {
+    justify-content: center;
+}
 .score-striker {
     color: blue;
     font-weight: bold;
     background-color: white;
+    text-align: left;
+
 }
 .score-goalkeeper {
     color: red;
     font-weight: bold;
     background-color: white;
-}
-.title {
-    justify-items: flex-start;
-}
-.value {
-    justify-items: flex-end;
+    text-align: left;
 }
 </style>
 

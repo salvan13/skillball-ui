@@ -1,5 +1,12 @@
 <template>
     <div class="main-pitch">
+        <div class="instructions">
+            <div class="instruction">
+                Single click: shoot left
+            </div>
+            <div class="instruction">Hold button: shot at the center</div>
+            <div class="instruction">Double click: shoot right</div>
+        </div>
         <div class="real-pitch" :class="{'animated': animation.active}">
             <div class="box">
             </div>
@@ -12,6 +19,7 @@
 </template>
 
 <script>
+
 export default {
     props: {
         animation: {
@@ -27,13 +35,20 @@ export default {
     background-color: green;
     height: 100vh;
     display: flex;
+    flex-direction: column;
     margin: 0 auto;
+}
+.instructions {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 0 5%;
+    font-weight: bold;
+    color: white;
 }
 
 .real-pitch {
     border: 1vh solid #fff;
     margin: 6% 6% 2%;
-    width: 100%;
     height: 50vh;
     position: relative;
 }
@@ -46,6 +61,7 @@ export default {
     min-width: 40%;
     max-width: 40%;
     min-height: 25vh;
+    z-index: 2;
 }
 
 .goal {
