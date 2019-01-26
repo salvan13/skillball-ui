@@ -19,7 +19,7 @@ export default class Game {
       }
     };
 
-    this.socket = new WebSocket('ws://192.168.78.230:3000/ws');
+    this.socket = new WebSocket('ws://skillball.herokuapp.com/ws');
 
     this.socket.onopen = () => {
       console.log('connected');
