@@ -22,7 +22,7 @@ export default class Game {
       }
     };
 
-    this.socket = new WebSocket('ws://skillball.herokuapp.com/ws');
+    this.socket = new WebSocket('ws://localhost:3000/ws');
 
     this.socket.onopen = () => {
       console.log('connected');
@@ -39,22 +39,6 @@ export default class Game {
       console.log('socket error', error);
       this.state.error = error;
     };
-
-
-    /*setTimeout(() => {
-        const msg1 = {
-          player: 0,
-          move: 'left'
-        };
-
-        const msg2 = {
-          player: 1,
-          move: 'left'
-        };
-
-        this.onMessage(msg1);
-        this.onMessage(msg2);
-    }, 2000);*/
 
   }
 
