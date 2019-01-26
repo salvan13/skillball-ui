@@ -10,6 +10,10 @@ export default {
         moves: {
             type: Object,
             required: true
+        },
+        goal: {
+            type: String,
+            required: true
         }
     },
     computed: {
@@ -21,8 +25,14 @@ export default {
                 return 'Make your move'
             } else if (!this.moves.p1) {
                 return 'Waiting for striker move'
-            } else {
+            } else if(!this.moves.p0) {
                 return 'Waiting for goalkeeper move'
+            } else {
+                if(!this.goal) {
+                    return 'OOOoooooOOOOOOooo';
+                } else {
+                    return this.goal;
+                }
             }
         }
     }

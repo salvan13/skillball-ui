@@ -19,7 +19,8 @@ export default class Game {
         goalkeeper: '',
         ball: '',
         goal: ''
-      }
+      },
+      goal: ''
     };
 
     this.socket = new WebSocket('ws://localhost:3000/ws');
@@ -47,11 +48,6 @@ export default class Game {
       this.state.moves[`p${msg.player}`] = msg;
     }
     if(this.state.moves.p0 && this.state.moves.p1) {
-      if(this.state.moves.p0.move === this.state.moves.p1.move) {
-        this.state.score.goalkeeper++;
-      } else {
-        this.state.score.striker++;
-      }
       this.state.animation = {
         active: true,
         goalkeeper: this.state.moves.p0.move,
@@ -60,8 +56,18 @@ export default class Game {
       }
 
       setTimeout(() => {
-        this.nextTurn();
-      }, 5000);
+        if(this.state.moves.p0.move === this.state.moves.p1.move) {
+          this.state.score.goalkeeper++;
+        } else {
+          this.state.score.striker++;
+        }
+        this.state.goal = this.state.moves.p0.move !== this.state.moves.p1.move ? 'GOOOOOAL!!!' : 'Amazing save!!'
+        
+        setTimeout(() => {
+          this.nextTurn();
+        }, 2000);
+
+      }, 2000);
 
     }
 
@@ -78,6 +84,7 @@ export default class Game {
       p0: null,
       p1: null
     };
+    this.state.goal = '';
     this.state.turn++;
   }
 
