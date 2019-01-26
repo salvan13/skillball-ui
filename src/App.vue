@@ -6,12 +6,23 @@
 </template>
 
 <script>
+import Game from './libs/game';
+
 import HelloWorld from './components/HelloWorld.vue'
 
 export default {
+  data: () => {
+    return {
+      game: null
+    };
+  },
   name: 'app',
   components: {
     HelloWorld
+  },
+  created() {
+    this.game = new Game();
+    this.game.start();
   }
 }
 </script>
